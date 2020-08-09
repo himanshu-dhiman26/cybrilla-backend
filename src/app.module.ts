@@ -6,18 +6,20 @@ import { Product } from './products/entities/product.entity';
 import { Cart } from './cart/entities/cart.entity';
 import { CartItems } from './cart/entities/cartItems.entity';
 import { Discount } from './discount/discounts.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     ProductsModule,
     CartsModule,
+    ConfigModule.forRoot(),
     SequelizeModule.forRoot({
       dialect: 'mysql',
-      host: '127.0.0.1',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'cy_backend',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       models: [Product, Cart, Discount, CartItems],
       autoLoadModels: true,
     }),
