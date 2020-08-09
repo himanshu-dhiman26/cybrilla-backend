@@ -1,21 +1,29 @@
 import {
   IsNotEmpty,
   IsInt,
-  IsNotEmptyObject,
+  IsOptional,
 } from 'class-validator';
 
 export class DiscountDto {
-  @IsNotEmpty()
-  type: string;
-
   @IsInt()
+  @IsOptional()
+  id: number;
+
   @IsNotEmpty()
-  quantity: number;
+  discount_mode: string;
 
   @IsNotEmpty()
   discount_type: string;
-  
+
   @IsInt()
-  @IsNotEmptyObject()
+  @IsNotEmpty()
   discount_value: number;
+
+  @IsInt()
+  @IsOptional()
+  cutoff_amount: number;
+
+  @IsInt()
+  @IsOptional()
+  cutoff_quantity: number;
 }

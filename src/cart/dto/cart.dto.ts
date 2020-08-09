@@ -2,6 +2,7 @@ import {
   IsOptional,
   IsNotEmptyObject,
 } from 'class-validator';
+import { DiscountDto } from "../../discount/discountRule.dto";
 
 export class CartDto {
   @IsOptional()
@@ -10,9 +11,6 @@ export class CartDto {
   @IsOptional()
   user_id: number;
 
-  @IsOptional()
-  cart_items: string;
-
   @IsNotEmptyObject()
-  discount_rules: string;
+  discount_rules: DiscountDto;
 }

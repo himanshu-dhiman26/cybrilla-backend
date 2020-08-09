@@ -4,8 +4,10 @@ import {
   Model,
   Table,
   AutoIncrement,
-  DataType,
+  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
+import { Discount } from 'src/discount/discounts.entity';
 
 @Table
 export class Product extends Model<Product> {
@@ -20,6 +22,10 @@ export class Product extends Model<Product> {
   @Column
   price: number;
 
-  @Column({ type: DataType.JSON })
-  discount_rules: string;
+  @ForeignKey(() => Discount)
+  @Column
+  discount_rule_id: number;
+
+  @BelongsTo(() => Discount)
+  discount: Discount
 }
